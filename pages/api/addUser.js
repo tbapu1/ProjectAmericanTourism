@@ -6,7 +6,7 @@ export default async (req, res) => {
 
   try {
     const client = await pool.connect();
-    const query = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
+    const query = 'INSERT INTO User (Username, Email, Password) VALUES ($1, $2, $3) RETURNING *';
     const result = await client.query(query, [username, email, password]);
     const insertedUser = result.rows[0];
     client.release();

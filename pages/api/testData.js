@@ -4,7 +4,7 @@ import pool from "@/lib/db";
 export default async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT username FROM users');
+    const result = await client.query('SELECT Username FROM User');
     const data = result.rows;
     client.release();
 

@@ -5,17 +5,7 @@ import { authContext } from '../context/AuthContext';
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { setAuthenticatedUser } = authContext();
-
-  useEffect(() => {
-    // Check if there's already a logged-in user on component mount
-    const storedUser = localStorage.getItem('authenticatedUser');
-    if (storedUser) {
-      console.log('User is already logged in:', storedUser);
-      // Optionally, redirect to a different page if a user is already logged in
-      // history.push('/dashboard');
-    }
-  }, []);
+  const { authenticatedUser, setAuthenticatedUser } = authContext();
 
   const handleLogin = async () => {
     try {
@@ -52,20 +42,28 @@ function LoginForm() {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleLogout}>Logout</button>
+      {authenticatedUser ? (
+        <div>
+          <p>Welcome, {authenticatedUser}!</p>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      )}
     </div>
   );
 }
