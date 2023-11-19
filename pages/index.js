@@ -2,13 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { authContext } from '@/context/AuthContext'
 
 export default function Home() {
+  const { authenticatedUser } = authContext();
+
   return (
     <main>
-      hello
+      {authenticatedUser && <p>Welcome, {authenticatedUser}!</p>}
     </main>
   )
 }
