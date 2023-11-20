@@ -9,7 +9,6 @@ export default function Home() {
 
   return (
     <main>
-      {authenticatedUser && <p>Welcome, {authenticatedUser}!</p>}
       <Cities></Cities>
     </main>
   )

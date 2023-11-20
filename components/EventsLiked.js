@@ -9,7 +9,7 @@ const EventsLiked = () => {
   const fetchEventsLiked = async () => {
     try {
       const response = await fetch(`/api/eventsLiked?username=${authenticatedUser}`);
-      if (response.ok) {
+      if (response.ok && authenticatedUser) {
         const likedEvents = await response.json();
         setEventsLiked(likedEvents);
       } else {

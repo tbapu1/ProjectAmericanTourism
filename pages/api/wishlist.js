@@ -1,4 +1,3 @@
-
 import pool from '../../lib/db';
 
 export default async (req, res) => {
@@ -7,16 +6,15 @@ export default async (req, res) => {
     
     const client = await pool.connect();
     try {
-      
       const result = await client.query(
-        'SELECT e."Event_ID", e."Name" FROM public."Event_Attended" ea JOIN public."Event" e ON ea."Event_ID" = e."Event_ID" WHERE ea."User_ID" = (SELECT "User_ID" FROM public."User" WHERE "Username" = $1)',
+        'SELECT w."Wishlist_ID", c."Name" FROM public."Wishlist" w JOIN public."City" c ON w."City_ID" = c."City_ID" WHERE w."User_ID" = (SELECT "User_ID" FROM public."User" WHERE "Username" = $1)',
         [username]
       );
 
       const data = result.rows;
       res.status(200).json(data);
     } catch (error) {
-      console.error('Error fetching events attended:', error);
+      console.error('Error fetching wishlist:', error);
       res.status(500).json({ error: 'Internal server error' });
     } finally {
       client.release();

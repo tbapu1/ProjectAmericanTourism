@@ -1,4 +1,3 @@
-// components/LoginForm.js
 import React, { useState, useEffect } from 'react';
 import { authContext } from '../context/AuthContext';
 

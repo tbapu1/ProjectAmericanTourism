@@ -1,4 +1,3 @@
-// pages/api/testData.js
 import pool from "@/lib/db";
 
 export default async (req, res) => {

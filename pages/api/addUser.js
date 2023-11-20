@@ -1,4 +1,3 @@
-// pages/api/addUser.js
 import pool from '../../db';
 
 export default async (req, res) => {

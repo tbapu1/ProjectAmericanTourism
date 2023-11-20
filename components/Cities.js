@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { authContext} from '../context/AuthContext';
+import NextLink from 'next/link';
 
-const EventsAttended = () => {
+const Cities = () => {
   const { authenticatedUser } = authContext();
-  const [eventsAttended, setEventsAttended] = useState([]);
+  const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchEventsAttended = async () => {
+  const fetchCities = async () => {
     try {
-      const response = await fetch(`/api/eventsAttended?username=${authenticatedUser}`);
-      if (response.ok && authenticatedUser) {
-        const attendedEvents = await response.json();
-        setEventsAttended(attendedEvents);
+      const response = await fetch(`/api/cities`);
+      if (response.ok) {
+        const cities = await response.json();
+        setCities(cities);
       } else {
         console.error('Failed to fetch events attended');
       }
@@ -23,8 +24,8 @@ const EventsAttended = () => {
   };
 
   useEffect(() => {
-    fetchEventsAttended();
-  }, [authenticatedUser]); // Refetch when the authenticated user changes
+    fetchCities();
+  }, []); // Refetch when the authenticated user changes
   
   if (loading) {
     return <p>Loading...</p>; // Display a loading message while data is being fetched
@@ -32,14 +33,18 @@ const EventsAttended = () => {
 
   return (
     <div>
-      <h2>Events Attended by {authenticatedUser}</h2>
+      <h2>Cities</h2>
       <ul>
-        {eventsAttended.map((event) => (
-          <li key={event.Event_ID}>{event.Name}</li>
+        {cities.map((city) => (
+          <li key={city.City_ID}>
+          <NextLink legacyBehavior href={`/cities/${city.Name}`}>
+            <a>{city.Name}</a>
+          </NextLink>
+        </li>
         ))}
       </ul>
     </div>
   );
 };
 
-export default EventsAttended;
+export default Cities;
