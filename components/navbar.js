@@ -11,10 +11,16 @@ const Navbar = () => {
           <Link href="/">Home</Link>
         </li>
         <li>
+          <Link href="/cities">Cities</Link>
+        </li>
+        <li>
+          <Link href="/events">Events</Link>
+        </li>
+        <li>
           <Link href="/about">About</Link>
         </li>
         <li>
-          <Link href="/enter">Enter</Link>
+          <Link href="/enter">Login</Link>
         </li>
         {authenticatedUser && (
           <li>

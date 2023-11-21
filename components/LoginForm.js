@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { authContext } from '../context/AuthContext';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { authenticatedUser, setAuthenticatedUser } = authContext();
-
+  const router = useRouter();
   const handleLogin = async () => {
     try {
       const response = await fetch('/api/auth', {
@@ -38,7 +42,10 @@ function LoginForm() {
     // Clear the authenticatedUser in the context
     setAuthenticatedUser(null);
   };
-
+  const handleRegister = () => {
+    // Navigate to the registration page
+    router.push('/enter/register');
+  };
   return (
     <div>
       {authenticatedUser ? (
@@ -61,6 +68,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button onClick={handleLogin}>Login</button>
+          <button onClick={handleRegister}>Register</button>
         </div>
       )}
     </div>

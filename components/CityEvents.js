@@ -6,7 +6,7 @@ const CityEvents = ({ cityName }) => { // Change prop name to cityName
 
   const fetchCityEvents = async () => {
     try {
-      const response = await fetch(`/api/cityEvents?cityName=${cityName}`); // Change query parameter to cityName
+      const response = await fetch(`/api/cityEvents?cityName=${cityName}`); 
       if (response.ok) {
         const cityEvents = await response.json();
         setEvents(cityEvents);

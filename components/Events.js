@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { authContext} from '../context/AuthContext';
 import NextLink from 'next/link';
 
-const Cities = () => {
+const Events = () => {
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchCities = async () => {
+  const fetchEvents = async () => {
     try {
-      const response = await fetch(`/api/cities`);
+      const response = await fetch(`/api/events`);
       if (response.ok) {
         const cities = await response.json();
         setCities(cities);
@@ -23,7 +23,7 @@ const Cities = () => {
   };
 
   useEffect(() => {
-    fetchCities();
+    fetchEvents();
   }, []); // Refetch when the authenticated user changes
   
   if (loading) {
@@ -32,12 +32,12 @@ const Cities = () => {
 
   return (
     <div>
-      <h2>Cities</h2>
+      <h2>Events</h2>
       <ul>
-        {cities.map((city) => (
-          <li key={city.City_ID}>
-          <NextLink legacyBehavior href={`/cities/${city.Name}`}>
-            <a>{city.Name}</a>
+        {cities.map((event) => (
+          <li key={event.City_ID}>
+          <NextLink legacyBehavior href={`/events/${event.Name}`}>
+            <a>{event.Name}</a>
           </NextLink>
         </li>
         ))}
@@ -46,4 +46,4 @@ const Cities = () => {
   );
 };
 
-export default Cities;
+export default Events;

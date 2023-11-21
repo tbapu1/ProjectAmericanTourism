@@ -32,7 +32,7 @@ const Wishlist = () => {
 
   return (
     <div>
-      <h2>Wishlist for {authenticatedUser}</h2>
+      <h2>Wishlist Cities for {authenticatedUser}</h2>
       <ul>
         {wishlist.map((city) => (
             <li key={city.City_ID}>

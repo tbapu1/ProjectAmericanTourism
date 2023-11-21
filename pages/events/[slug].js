@@ -1,19 +1,21 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { authContext } from '@/context/AuthContext'
-import Cities from '@/components/Cities'
-import UpcomingEvents from '@/components/UpcomingEvents'
+import EventDetails from '@/components/EventDetails'
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function EventDetailsPage() {
+  const router = useRouter();
   const { authenticatedUser } = authContext();
+  const { slug } = router.query; 
 
   return (
     <main>
-      {authenticatedUser && <p>Welcome, {authenticatedUser}!</p>}
-      <Cities></Cities>
-      <UpcomingEvents></UpcomingEvents>
+       {slug && <EventDetails eventName={slug} />}
+       
     </main>
   )
 }

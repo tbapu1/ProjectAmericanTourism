@@ -1,4 +1,3 @@
-
 import Navbar from '@/components/navbar';
 import { AuthProvider } from '../context/AuthContext';
 

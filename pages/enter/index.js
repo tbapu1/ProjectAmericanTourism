@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { useContext } from 'react';
-import LoginForm from '../components/LoginForm';
-import { authContext } from '../context/AuthContext';
+import LoginForm from '@/components/LoginForm';
+import { authContext } from '@/context/AuthContext';
 
 const Enter = () => {
 const { authenticatedUser } = authContext();
