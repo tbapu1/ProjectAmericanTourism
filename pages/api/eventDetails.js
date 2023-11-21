@@ -4,7 +4,6 @@ export default async (req, res) => {
   if (req.method === 'GET') {
     const { eventName } = req.query; 
     const client = await pool.connect();
-    console.log("test");
     try {
       const result = await client.query(`
         SELECT e."Event_ID", e."Name" as "Event_Name", ed."Ticket_Price", ed."Max_Occupancy", ed."Description", t."Date", t."Start_Time", t."End_Time"
