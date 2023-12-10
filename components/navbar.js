@@ -1,32 +1,42 @@
 import Link from 'next/link';
 import { authContext } from '../context/AuthContext';
-
+import styles from '../styles/Navbar.module.css';
 const Navbar = () => {
   const { authenticatedUser } = authContext();
 
   return (
-    <nav>
-      <ul>
+    <nav className={styles.navbar}>
+      <ul className={styles.navList}>
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/">
+            <span className={styles.navLink}>Home</span>
+          </Link>
         </li>
         <li>
-          <Link href="/cities">Cities</Link>
+          <Link href="/cities">
+            <span className={styles.navLink}>Cities</span>
+          </Link>
         </li>
         <li>
-          <Link href="/events">Events</Link>
+          <Link href="/events">
+            <span className={styles.navLink}>Events</span>
+          </Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+          <Link href="/about">
+            <span className={styles.navLink}>About</span>
+          </Link>
         </li>
         <li>
-          <Link href="/enter">Login</Link>
+          <Link href="/enter">
+            <span className={styles.navLink}>Login</span>
+          </Link>
         </li>
+
         {authenticatedUser && (
           <li>
-            {/* Link to the authenticated user's profile */}
-            <Link legacyBehavior href="/[username]" as={`/${authenticatedUser}`}>
-              <a>{`Profile`}</a>
+            <Link href="/[username]" as={`/${authenticatedUser}`}>
+              <span className={styles.navLink}>Profile</span>
             </Link>
           </li>
         )}

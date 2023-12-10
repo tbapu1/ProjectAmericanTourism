@@ -1,3 +1,5 @@
+import Head from 'next/head';
+import styles from '@/styles/Enter.module.css';
 import React from 'react';
 import { useContext } from 'react';
 import LoginForm from '@/components/LoginForm';
@@ -7,12 +9,17 @@ const Enter = () => {
 const { authenticatedUser } = authContext();
 
   return (
-      <div>
-        <h1>Login Page</h1>
+    <div className={styles.container}>
+      <Head>
+        <title>Project American Tourism</title>
+      </Head>
+
+      <h1>Login Page</h1>
             <LoginForm/>
             {authenticatedUser && <p>Welcome, {authenticatedUser}!</p>}
-      </div>
-  );
+
+    </div>
+  )
 };
 
 export default Enter;

@@ -13,7 +13,6 @@ const EventForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // You can perform additional validation here before submitting the data
 
     try {
       const response = await fetch('/api/eventForm', {
@@ -35,7 +34,7 @@ const EventForm = () => {
 
       if (response.ok) {
         console.log('Event created successfully');
-        // Optionally, you can redirect the user or perform other actions upon successful submission
+
       } else {
         console.error('Failed to create event');
       }

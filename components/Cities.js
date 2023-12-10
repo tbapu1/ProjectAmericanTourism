@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { authContext} from '../context/AuthContext';
-import NextLink from 'next/link';
+import Link from 'next/link';
+import styles from '../styles/Cities.module.css';
+
+const getImageForCity = (cityName) => {
+  if (cityName === 'Chicago') {
+    return '/Chicago.jpg'; 
+  } else if (cityName === 'Dallas') {
+    return '/Dallas.jpg';
+  } else if (cityName === 'New York') {
+    return '/NewYork.jpg';
+  } else if (cityName === 'Los Angeles') {
+    return '/LosAngeles.jpg';
+  } 
+};
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
@@ -13,35 +25,41 @@ const Cities = () => {
         const cities = await response.json();
         setCities(cities);
       } else {
-        console.error('Failed to fetch events attended');
+        console.error('Failed to fetch cities');
       }
     } catch (error) {
       console.error('Error during fetch:', error);
     } finally {
-      setLoading(false); // Set loading to false regardless of success or failure
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchCities();
-  }, []); // Refetch when the authenticated user changes
-  
+  }, []);
+
   if (loading) {
-    return <p>Loading...</p>; // Display a loading message while data is being fetched
+    return <p>Loading...</p>;
   }
 
   return (
-    <div>
-      <h2>Cities</h2>
-      <ul>
+    <div className={styles.citiesContainer}>
+      <h1 className={styles.title}>Cities</h1>
+      <div className={styles.cityGrid}>
         {cities.map((city) => (
-          <li key={city.City_ID}>
-          <NextLink legacyBehavior href={`/cities/${city.Name}`}>
-            <a>{city.Name}</a>
-          </NextLink>
-        </li>
+          <div key={city.City_ID} className={styles.cityItem}>
+            <Link href={`/cities/${city.Name}`} passHref>
+              <div>
+                <img
+                  src={getImageForCity(city.Name)}
+                  alt={`Image of ${city.Name}`}
+                  className={styles.cityImage}
+                />
+              </div>
+            </Link>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

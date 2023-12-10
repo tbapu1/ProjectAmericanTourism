@@ -1,47 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { authContext} from '../context/AuthContext';
 import NextLink from 'next/link';
+import styles from '../styles/Events.module.css';
 
 const Events = () => {
-  const [cities, setCities] = useState([]);
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const getImageForEvent = (eventName) => {
+    switch (eventName) {
+      case 'Texas State Fair':
+        return '/TexasStateFair.jpg';
+      case 'Illinois State Fair':
+        return '/IllinoisStateFair.jpg';
+      case 'Waldos Escape Room':
+        return '/WaldosEscapeRoom.jpg';
+      case 'Los Angeles Museum of Art':
+        return '/LosAngelesMuseumOfArt.jpg';
+      case 'Museum of Science and Industry':
+        return '/MuseumOfScienceAndIndustry.jpg';
+      default:
+        return '';
+    }
+  };
 
   const fetchEvents = async () => {
     try {
       const response = await fetch(`/api/events`);
       if (response.ok) {
-        const cities = await response.json();
-        setCities(cities);
+        const eventsData = await response.json();
+        setEvents(eventsData);
       } else {
-        console.error('Failed to fetch events attended');
+        console.error('Failed to fetch events');
       }
     } catch (error) {
       console.error('Error during fetch:', error);
     } finally {
-      setLoading(false); // Set loading to false regardless of success or failure
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchEvents();
-  }, []); // Refetch when the authenticated user changes
-  
+  }, []);
+
   if (loading) {
-    return <p>Loading...</p>; // Display a loading message while data is being fetched
+    return <p>Loading...</p>;
   }
 
   return (
-    <div>
-      <h2>Events</h2>
-      <ul>
-        {cities.map((event) => (
-          <li key={event.City_ID}>
-          <NextLink legacyBehavior href={`/events/${event.Name}`}>
-            <a>{event.Name}</a>
-          </NextLink>
-        </li>
+    <div className={styles.eventsContainer}>
+      <h1 className={styles.title}>Events</h1>
+      <div className={styles.eventGrid}>
+        {events.map((event) => (
+          <div key={event.Event_ID} className={styles.eventItem}>
+            <NextLink legacyBehavior href={`/events/${event.Name}`} passHref>
+              <div>
+                <img
+                  src={getImageForEvent(event.Name)}
+                  alt={`Image of ${event.Name}`}
+                  className={styles.eventImage}
+                />
+              </div>
+            </NextLink>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

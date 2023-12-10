@@ -1,19 +1,28 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import { authContext } from '@/context/AuthContext'
-import Cities from '@/components/Cities'
-import UpcomingEvents from '@/components/UpcomingEvents'
+import Head from 'next/head';
+import styles from '@/styles/Home.module.css';
+import { authContext } from '@/context/AuthContext';
 
 export default function Home() {
   const { authenticatedUser } = authContext();
 
   return (
-    <main>
-      {authenticatedUser && <p>Welcome, {authenticatedUser}!</p>}
-      <Cities></Cities>
-      <UpcomingEvents></UpcomingEvents>
-    </main>
-  )
+    <div className={styles.container}>
+      <Head>
+        <title>Project American Tourism</title>
+        <meta name="description" content="Explore and discover American tourism destinations and events." />
+      </Head>
+      
+      <main>
+        <div className={styles.hero}>
+          <img src="/AmericanNight.jpg" alt="American Night" />
+          <div className={styles.overlay}></div>
+          <div className={styles.content}>
+            <h1 className={styles.title}>Welcome to Project American Tourism</h1>
+            {authenticatedUser && <p className={styles.greeting}>Welcome, {authenticatedUser}!</p>}
+          </div>
+        </div>
+      </main>
+
+    </div>
+  );
 }

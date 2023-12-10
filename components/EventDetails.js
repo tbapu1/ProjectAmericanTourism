@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import styles from '../styles/CityEvents.module.css';
 const EventDetails = ({ eventName }) => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch event details
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
@@ -24,15 +25,23 @@ const EventDetails = ({ eventName }) => {
     fetchEventDetails();
   }, [eventName]);
 
-  if (loading) {
+  if (loading || !event) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div>
-      <h1>Event details</h1>
-      {event ? (
-        <div>
+    <div className={styles.cityEvents}>
+      {/* Background Image */}
+      <div className={styles.backgroundImage}></div>
+
+      {/* Content */}
+      <div className={styles.content}>
+        {/* Event Details */}
+        <div className={styles.cityDetails}>
+          <p>‎ </p>
+          <p>‎ </p>
+          <p>‎ </p>
+          <h1 className={styles.centerText}>Event Details</h1>
           <strong>{event.Event_Name}</strong>
           <p>Ticket Price: {event.Ticket_Price}</p>
           <p>Max Occupancy: {event.Max_Occupancy}</p>
@@ -41,9 +50,7 @@ const EventDetails = ({ eventName }) => {
           <p>Time: {event.Start_Time} - {event.End_Time}</p>
           <hr />
         </div>
-      ) : (
-        <p>No event found</p>
-      )}
+      </div>
     </div>
   );
 };

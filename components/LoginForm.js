@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { authContext } from '../context/AuthContext';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-
+import styles from '../styles/LoginForm.module.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { authenticatedUser, setAuthenticatedUser } = authContext();
   const router = useRouter();
+
   const handleLogin = async () => {
     try {
       const response = await fetch('/api/auth', {
@@ -22,10 +21,6 @@ function LoginForm() {
 
       if (response.ok) {
         const user = await response.json();
-        console.log('Login success');
-        console.log('User from server:', user);
-
-        // Store the actual user data in localStorage
         localStorage.setItem('authenticatedUser', JSON.stringify(user));
         setAuthenticatedUser(username);
       } else {
@@ -37,17 +32,20 @@ function LoginForm() {
   };
 
   const handleLogout = () => {
-    // Clear the stored user data in localStorage
     localStorage.removeItem('authenticatedUser');
-    // Clear the authenticatedUser in the context
     setAuthenticatedUser(null);
   };
+
   const handleRegister = () => {
-    // Navigate to the registration page
     router.push('/enter/register');
   };
+
   return (
-    <div>
+    <div className={`${styles.loginBackground} ${styles.ctitle}`}>
+          <p>‎ </p>
+          <p>‎ </p>
+          <p>‎ </p>
+      <p>Login Page</p>
       {authenticatedUser ? (
         <div>
           <p>Welcome, {authenticatedUser}!</p>

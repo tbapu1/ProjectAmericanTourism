@@ -1,0 +1,36 @@
+
+.navbar {
+  background-color: #0031f4;
+  padding: 30px;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; 
+  box-shadow: 0 2px 4px rgba(27, 0, 106, 0.208); 
+}
+
+
+.navList {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navList li {
+  margin: 0 10px;
+}
+
+.navLink {
+  color: white; 
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+  font-size: 25px; 
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.navLink:hover {
+  color: rgb(222, 0, 0); 
+}

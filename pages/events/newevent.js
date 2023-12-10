@@ -8,8 +8,19 @@ export default function AddEvent() {
   const { authenticatedUser } = authContext();
 
   return (
-    <main>
-      <EventForm/>
-    </main>
+    <div className={styles.container}>
+      <div className={styles.hero}>
+          <img src="/AmericanNight.jpg" alt="American Night" />
+          <div className={styles.overlay}></div>
+          <div className={styles.content}></div>
+        </div>
+      <Head>
+        <title>Project American Tourism</title>
+      </Head>
+
+      <main>
+      <EventForm></EventForm>
+      </main>
+      </div>
   )
 }
